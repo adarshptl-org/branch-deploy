@@ -25,20 +25,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SECRET_TOKEN }}
-      - name: Terraform plan
-        id: plan
-        timeout-minutes: 30
-        run: terraform plan
-        # continue-on-error: true
-        working-directory: ${{ env.working-directory }}
-        env:
-          TF_VAR_test_var: "my-github-actions-role"
-          TF_CLI_ARGS_plan: ${{ vars.TF_CLI_ARGS_plan }}
-          TF_CLI_ARGS: ${{ vars.TF_CLI_ARGS }}
-          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
-          ARM_CLIENT_ID: ${{ fromJSON(vars.AZURE_OIDC).clientId }}
-          ARM_SUBSCRIPTION_ID: ${{ fromJSON(vars.AZURE_OIDC).subscriptionId }}
-          ARM_TENANT_ID: ${{ fromJSON(vars.AZURE_OIDC).tenantId }}
       # Execute IssueOps branch deployment logic, hooray!
       # This will be used to "gate" all future steps below and conditionally trigger steps/deployments
       - uses: github/branch-deploy@v9.6.0
