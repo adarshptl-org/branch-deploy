@@ -5,6 +5,9 @@ resource "random_integer" "priority" {
 output "random_integer" {
   value = random_integer.priority.result
 }
+output "random_integer1" {
+  value = random_integer.priority.result
+}
 terraform {
 }
 
